@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For You ❤️</title>
+<title>For One and Only You Smriti Humagain ❤️</title>
 <style>
 *{
   margin:0;
@@ -88,13 +88,13 @@ button:hover{
 <body>
 
 <div class="card">
-  <h1>Hey ❤️</h1>
+  <h1>Hey Smriti❤️</h1>
 
   <div id="typeText"></div>
 
   <div id="buttons" class="hidden">
-    <button class="yes" onclick="yesClick()">I like this 💕</button>
-    <button class="maybe" onclick="hmmClick()">Hmm 👀</button>
+    <button class="yes" onclick="yesClick()">Yes 💕</button>
+    <button class="maybe" onclick="hmmClick()"> No 😒👀</button>
   </div>
 
   <div id="finalMessage" class="hidden"></div>
@@ -132,7 +132,7 @@ typeWriter(
 function yesClick(){
   document.getElementById("buttons").style.display="none";
   typeWriter(
-    "🌹 I didn’t build this to impress anyone.\nI just wanted to try something new and share it quietly.\n💌",
+    "🌹 I didn’t build this to impress anyone.\n ❤️❤️ \n I just wanted to try something new and share it quietly.\n💌",
     "finalMessage"
   );
   document.getElementById("finalMessage").classList.remove("hidden");
@@ -150,7 +150,7 @@ function hmmClick(){
 setInterval(()=>{
   const h=document.createElement("div");
   h.className="heart";
-  h.innerHTML="❤️";
+  h.innerHTML="❤️❤️❤️";
   h.style.left=Math.random()*100+"vw";
   h.style.animationDuration=4+Math.random()*3+"s";
   document.body.appendChild(h);
@@ -160,3 +160,4 @@ setInterval(()=>{
 
 </body>
 </html>
+
