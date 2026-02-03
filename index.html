@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>For You ❤️</title>
-
 <style>
 *{
   margin:0;
@@ -11,7 +10,6 @@
   box-sizing:border-box;
   font-family:'Segoe UI', sans-serif;
 }
-
 body{
   height:100vh;
   background: radial-gradient(circle at top, #ff9a9e, #fad0c4);
@@ -21,7 +19,6 @@ body{
   overflow:hidden;
   color:#fff;
 }
-
 .card{
   background: rgba(255,255,255,0.18);
   backdrop-filter: blur(12px);
@@ -33,24 +30,20 @@ body{
   box-shadow: 0 25px 45px rgba(0,0,0,0.25);
   animation: popIn 0.9s ease;
 }
-
 @keyframes popIn{
   from{transform:scale(0.85);opacity:0}
   to{transform:scale(1);opacity:1}
 }
-
 h1{
   font-size:2.3rem;
   margin-bottom:15px;
 }
-
-#typeText{
+#typeText, #finalMessage{
   font-size:1.1rem;
   min-height:70px;
   margin-bottom:25px;
   line-height:1.6;
 }
-
 button{
   padding:12px 24px;
   border:none;
@@ -60,29 +53,24 @@ button{
   margin:8px;
   transition:0.3s;
 }
-
 .yes{
   background:white;
   color:#ff4f7b;
 }
-
 .maybe{
   background:transparent;
   border:1px solid white;
   color:white;
 }
-
 button:hover{
   transform:scale(1.08);
 }
-
 .hidden{
   display:none;
   margin-top:20px;
   font-size:1.1rem;
   line-height:1.6;
 }
-
 /* floating hearts */
 .heart{
   position:absolute;
@@ -91,72 +79,76 @@ button:hover{
   animation: float 6s linear infinite;
   opacity:0.7;
 }
-
 @keyframes float{
   from{transform:translateY(0)}
   to{transform:translateY(-120vh)}
 }
 </style>
 </head>
-
 <body>
 
 <div class="card">
-  <h1>Hey Smriti ❤️</h1>
-  <p> This may be unexpected But Do you want to continue </p>
+  <h1>Hey ❤️</h1>
+
   <div id="typeText"></div>
 
   <div id="buttons" class="hidden">
-    <button class="yes" onclick="yesClick()"> Yes 💕</button>
-    <button class="maybe" onclick="hmmClick()"> No 😒👀</button>
+    <button class="yes" onclick="yesClick()">I like this 💕</button>
+    <button class="maybe" onclick="hmmClick()">Hmm 👀</button>
   </div>
 
-  <div id="finalYes" class="hidden">
-    🌹<br>
-  <!-- <p>I didn’t build this to impress but 
-   I just wanted to make something nice and share it quietly </p>
-<br> -->
-    💌
-  </div>
-
-  <div id="finalHmm" class="hidden">
-    That’s okay.<br>
-    Some things are better felt slowly.
-  </div>
+  <div id="finalMessage" class="hidden"></div>
 </div>
 
 <script>
-/* Typewriter effect */
-const text = "So… I tried doing something different this Valentine’s. Not big. Just honest.";
-let index = 0;
-const speed = 45;
-
-function typeWriter(){
-  if(index < text.length){
-    document.getElementById("typeText").innerHTML += text.charAt(index);
-    index++;
-    setTimeout(typeWriter, speed);
-  } else {
-    document.getElementById("buttons").classList.remove("hidden");
+// Typewriter effect
+function typeWriter(message, targetId, callback=null){
+  let i=0;
+  const speed=45;
+  const target=document.getElementById(targetId);
+  target.innerHTML="";
+  function type(){
+    if(i<message.length){
+      let char=message.charAt(i);
+      if(char=="\n") char="<br>";
+      target.innerHTML+=char;
+      i++;
+      setTimeout(type,speed);
+    } else {
+      if(callback) callback();
+    }
   }
+  type();
 }
-typeWriter();
 
-/* Yes button */
+// Initial opening message
+typeWriter(
+  "So… I tried doing something different this Valentine’s. Not big. Just honest.\nThis may be unexpected.\nBut… do you want to continue?",
+  "typeText",
+  () => {document.getElementById("buttons").classList.remove("hidden");}
+);
+
+// Button actions
 function yesClick(){
   document.getElementById("buttons").style.display="none";
-  document.getElementById("finalYes").classList.remove("hidden");
+  typeWriter(
+    "🌹 I didn’t build this to impress anyone.\nI just wanted to try something new and share it quietly.\n💌",
+    "finalMessage"
+  );
+  document.getElementById("finalMessage").classList.remove("hidden");
 }
-
-/* Hmm button */
 function hmmClick(){
   document.getElementById("buttons").style.display="none";
-  document.getElementById("finalHmm").classList.remove("hidden");
+  typeWriter(
+    "That’s okay.\nSome things are better felt slowly.",
+    "finalMessage"
+  );
+  document.getElementById("finalMessage").classList.remove("hidden");
 }
 
-/* Floating hearts */
+// Floating hearts
 setInterval(()=>{
-  const h = document.createElement("div");
+  const h=document.createElement("div");
   h.className="heart";
   h.innerHTML="❤️";
   h.style.left=Math.random()*100+"vw";
@@ -168,8 +160,3 @@ setInterval(()=>{
 
 </body>
 </html>
-
-
-
-
-
