@@ -132,7 +132,7 @@ typeWriter(
 function yesClick(){
   document.getElementById("buttons").style.display="none";
   typeWriter(
-    "🌹 I didn’t build this to impress anyone.\n ❤️❤️ \n I just wanted to try something new and share it quietly.\n💌",
+    "🌹 I didn’t build this to impress YOU.\n ❤️❤️ \n I just wanted to try something new and share it quietly.\n💌",
     "finalMessage"
   );
   document.getElementById("finalMessage").classList.remove("hidden");
@@ -150,8 +150,9 @@ function hmmClick(){
 setInterval(()=>{
   const h=document.createElement("div");
   h.className="heart";
-  h.innerHTML="❤️   ❤️";
+  h.innerHTML="❤️        ❤️";
   h.innerHTML="❤️";
+  h.innerHTML="❤️        ❤️";
   h.style.left=Math.random()*100+"vw";
   h.style.animationDuration=4+Math.random()*3+"s";
   document.body.appendChild(h);
@@ -161,5 +162,6 @@ setInterval(()=>{
 
 </body>
 </html>
+
 
 
