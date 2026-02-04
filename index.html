@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For You Smriti ❤️</title>
+<title>For You ❤️</title>
 
 <style>
 *{
@@ -42,7 +42,7 @@ h1{
 #typeText, #finalMessage{
   font-size:1.1rem;
   min-height:70px;
-  margin-bottom:25px;
+  margin-bottom:20px;
   line-height:1.6;
 }
 button{
@@ -70,6 +70,19 @@ button:hover{
   display:none;
 }
 
+/* Meet box */
+#meetBox{
+  margin-top:20px;
+}
+#meetBox input{
+  padding:10px;
+  width:90%;
+  border-radius:15px;
+  border:none;
+  text-align:center;
+  margin-bottom:15px;
+}
+
 /* floating hearts */
 .heart{
   position:absolute;
@@ -88,16 +101,46 @@ button:hover{
 <body>
 
 <div class="card">
-  <h1>Hey Smriti ❤️</h1>
+  <h1>Hey ❤️</h1>
 
   <div id="typeText"></div>
 
   <div id="buttons" class="hidden">
-    <button class="yes" onclick="firstYes()">Yes 💕</button>
-    <button class="maybe" onclick="firstNo()">No 😒👀</button>
+    <button class="yes" onclick="yesClick()">Yes 💕</button>
+    <button class="maybe" onclick="noClick()">No 😒👀</button>
   </div>
 
   <div id="finalMessage" class="hidden"></div>
+
+  <!-- Meet Question -->
+  <div id="meetBox" class="hidden">
+    <p style="margin-bottom:10px;">
+      If someday feels right… when could we meet?
+    </p>
+
+    <form
+      action="https://docs.google.com/forms/d/e/FORM_ID_HERE/formResponse"
+      method="POST"
+      target="hidden_iframe"
+      onsubmit="submitted=true;"
+    >
+      <input
+        type="text"
+        name="ENTRY_ID_HERE"
+        placeholder="Day & time (e.g. Sunday 4 PM)"
+        required
+      >
+      <br>
+      <button class="yes" type="submit">Send 💌</button>
+    </form>
+
+    <iframe
+      name="hidden_iframe"
+      style="display:none;"
+      onload="formSubmitted()"
+    ></iframe>
+  </div>
+
 </div>
 
 <script>
@@ -121,64 +164,49 @@ function typeWriter(message, targetId, callback=null){
   type();
 }
 
-// Initial message
+// Opening
 typeWriter(
-  "So… I tried doing something different this Valentine’s.\nNot big. Just honest.\nThis may be unexpected.\nBut… do you want to continue?",
+  "So… I tried doing something different.\nNot big. Just honest.\n\nThis may be unexpected.\nBut… do you want to continue?",
   "typeText",
-  () => document.getElementById("buttons").classList.remove("hidden")
+  () => {
+    document.getElementById("buttons").classList.remove("hidden");
+  }
 );
 
-// First Yes
-function firstYes(){
+// Yes click
+function yesClick(){
   document.getElementById("buttons").style.display="none";
-  typeWriter(
-    "I didn’t build this to impress you.\nI just wanted to try something new.\n\nCan we meet sometime?",
-    "finalMessage",
-    showMeetButtons
-  );
-  document.getElementById("finalMessage").classList.remove("hidden");
-}
 
-// First No
-function firstNo(){
-  document.getElementById("buttons").style.display="none";
   typeWriter(
-    "That’s okay.\nSome things are better left gentle.",
-    "finalMessage"
-  );
-  document.getElementById("finalMessage").classList.remove("hidden");
-}
-
-// Meet buttons
-function showMeetButtons(){
-  const div=document.createElement("div");
-  div.innerHTML=`
-    <button class="yes" onclick="meetYes()">Yes 🙂</button>
-    <button class="maybe" onclick="meetNo()">Not now</button>
-  `;
-  document.querySelector(".card").appendChild(div);
-}
-
-// Meet Yes → WhatsApp notification
-function meetYes(){
-  typeWriter(
-    "That sounds nice.\nWe can decide whenever you feel comfortable.",
+    "🌹 I didn’t build this to impress you.\nI built it because I wanted to try something new with you.\n\nNo pressure at all.",
     "finalMessage",
     () => {
-      setTimeout(()=>{
-        window.location.href =
-          "https://wa.me/977XXXXXXXXXX?text=Hey%20I%20saw%20your%20site.%20We%20can%20meet%20sometime.";
-      },1500);
+      document.getElementById("meetBox").classList.remove("hidden");
     }
   );
+
+  document.getElementById("finalMessage").classList.remove("hidden");
 }
 
-// Meet No
-function meetNo(){
+// No click
+function noClick(){
+  document.getElementById("buttons").style.display="none";
+
   typeWriter(
-    "No pressure at all.\nThank you for reading this.",
+    "That’s okay.\nSome things are better left gentle and unforced.",
     "finalMessage"
   );
+
+  document.getElementById("finalMessage").classList.remove("hidden");
+}
+
+// Form submit feedback
+let submitted=false;
+function formSubmitted(){
+  if(submitted){
+    document.getElementById("meetBox").innerHTML =
+      "Thank you for telling me 🤍";
+  }
 }
 
 // Floating hearts
