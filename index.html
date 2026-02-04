@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For You ❤️</title>
-
+<title>For You Smriti Humagain ❤️</title>
 <style>
 *{
   margin:0;
@@ -42,7 +41,7 @@ h1{
 #typeText, #finalMessage{
   font-size:1.1rem;
   min-height:70px;
-  margin-bottom:20px;
+  margin-bottom:25px;
   line-height:1.6;
 }
 button{
@@ -68,21 +67,10 @@ button:hover{
 }
 .hidden{
   display:none;
-}
-
-/* Meet box */
-#meetBox{
   margin-top:20px;
+  font-size:1.1rem;
+  line-height:1.6;
 }
-#meetBox input{
-  padding:10px;
-  width:90%;
-  border-radius:15px;
-  border:none;
-  text-align:center;
-  margin-bottom:15px;
-}
-
 /* floating hearts */
 .heart{
   position:absolute;
@@ -95,19 +83,26 @@ button:hover{
   from{transform:translateY(0)}
   to{transform:translateY(-120vh)}
 }
+#meetBox input{
+  padding:10px;
+  width:90%;
+  border-radius:15px;
+  border:none;
+  text-align:center;
+  margin-bottom:15px;
+}
 </style>
 </head>
-
 <body>
 
 <div class="card">
-  <h1>Hey ❤️</h1>
+  <h1>Hey Smriti❤️</h1>
 
   <div id="typeText"></div>
 
   <div id="buttons" class="hidden">
     <button class="yes" onclick="yesClick()">Yes 💕</button>
-    <button class="maybe" onclick="noClick()">No 😒👀</button>
+    <button class="maybe" onclick="hmmClick()"> No 😒👀</button>
   </div>
 
   <div id="finalMessage" class="hidden"></div>
@@ -115,19 +110,19 @@ button:hover{
   <!-- Meet Question -->
   <div id="meetBox" class="hidden">
     <p style="margin-bottom:10px;">
-      If someday feels right… when could we meet?
+      If someday feels right… when do you feel like we could hang out? 🫶
     </p>
 
     <form
-      action="https://docs.google.com/forms/d/e/FORM_ID_HERE/formResponse"
+      action="https://docs.google.com/forms/d/e/H7QB41sVVGWxxe5S9/formResponse"
       method="POST"
       target="hidden_iframe"
       onsubmit="submitted=true;"
     >
       <input
         type="text"
-        name="ENTRY_ID_HERE"
-        placeholder="Day & time (e.g. Sunday 4 PM)"
+        name="entry.988174813"
+        placeholder="Type day & time you feel like it :)"
         required
       >
       <br>
@@ -140,11 +135,10 @@ button:hover{
       onload="formSubmitted()"
     ></iframe>
   </div>
-
 </div>
 
 <script>
-// Typewriter
+// Typewriter effect
 function typeWriter(message, targetId, callback=null){
   let i=0;
   const speed=45;
@@ -164,39 +158,29 @@ function typeWriter(message, targetId, callback=null){
   type();
 }
 
-// Opening
+// Initial message
 typeWriter(
-  "So… I tried doing something different.\nNot big. Just honest.\n\nThis may be unexpected.\nBut… do you want to continue?",
+  "So… I tried doing something different this Valentine’s. Not big. Just honest.\nThis may be unexpected.\nBut… do you want to continue?",
   "typeText",
-  () => {
-    document.getElementById("buttons").classList.remove("hidden");
-  }
+  () => {document.getElementById("buttons").classList.remove("hidden");}
 );
 
-// Yes click
+// Button actions
 function yesClick(){
   document.getElementById("buttons").style.display="none";
-
   typeWriter(
-    "🌹 I didn’t build this to impress you.\nI built it because I wanted to try something new with you.\n\nNo pressure at all.",
+    "🌹 I didn’t build this to impress YOU.\n❤️❤️\nI just wanted to try something new and share it quietly 💌",
     "finalMessage",
-    () => {
-      document.getElementById("meetBox").classList.remove("hidden");
-    }
+    () => {document.getElementById("meetBox").classList.remove("hidden");}
   );
-
   document.getElementById("finalMessage").classList.remove("hidden");
 }
-
-// No click
-function noClick(){
+function hmmClick(){
   document.getElementById("buttons").style.display="none";
-
   typeWriter(
-    "That’s okay.\nSome things are better left gentle and unforced.",
+    "That’s okay.\nSome things are better felt slowly.",
     "finalMessage"
   );
-
   document.getElementById("finalMessage").classList.remove("hidden");
 }
 
