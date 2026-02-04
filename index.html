@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For You Smriti Humagain ❤️</title>
+<title>For You Smriti ❤️</title>
+
 <style>
 *{
   margin:0;
@@ -67,10 +68,8 @@ button:hover{
 }
 .hidden{
   display:none;
-  margin-top:20px;
-  font-size:1.1rem;
-  line-height:1.6;
 }
+
 /* floating hearts */
 .heart{
   position:absolute;
@@ -85,23 +84,24 @@ button:hover{
 }
 </style>
 </head>
+
 <body>
 
 <div class="card">
-  <h1>Hey Smriti❤️</h1>
+  <h1>Hey Smriti ❤️</h1>
 
   <div id="typeText"></div>
 
   <div id="buttons" class="hidden">
-    <button class="yes" onclick="yesClick()">Yes 💕</button>
-    <button class="maybe" onclick="hmmClick()"> No 😒👀</button>
+    <button class="yes" onclick="firstYes()">Yes 💕</button>
+    <button class="maybe" onclick="firstNo()">No 😒👀</button>
   </div>
 
   <div id="finalMessage" class="hidden"></div>
 </div>
 
 <script>
-// Typewriter effect
+// Typewriter
 function typeWriter(message, targetId, callback=null){
   let i=0;
   const speed=45;
@@ -121,38 +121,71 @@ function typeWriter(message, targetId, callback=null){
   type();
 }
 
-// Initial opening message
+// Initial message
 typeWriter(
-  "So… I tried doing something different this Valentine’s. Not big. Just honest.\nThis may be unexpected.\nBut… do you want to continue?",
+  "So… I tried doing something different this Valentine’s.\nNot big. Just honest.\nThis may be unexpected.\nBut… do you want to continue?",
   "typeText",
-  () => {document.getElementById("buttons").classList.remove("hidden");}
+  () => document.getElementById("buttons").classList.remove("hidden")
 );
 
-// Button actions
-function yesClick(){
+// First Yes
+function firstYes(){
   document.getElementById("buttons").style.display="none";
   typeWriter(
-    "🌹 I didn’t build this to impress YOU.\n ❤️❤️ \n I just wanted to try something new and share it quietly.\n💌",
+    "I didn’t build this to impress you.\nI just wanted to try something new.\n\nCan we meet sometime?",
+    "finalMessage",
+    showMeetButtons
+  );
+  document.getElementById("finalMessage").classList.remove("hidden");
+}
+
+// First No
+function firstNo(){
+  document.getElementById("buttons").style.display="none";
+  typeWriter(
+    "That’s okay.\nSome things are better left gentle.",
     "finalMessage"
   );
   document.getElementById("finalMessage").classList.remove("hidden");
 }
-function hmmClick(){
-  document.getElementById("buttons").style.display="none";
+
+// Meet buttons
+function showMeetButtons(){
+  const div=document.createElement("div");
+  div.innerHTML=`
+    <button class="yes" onclick="meetYes()">Yes 🙂</button>
+    <button class="maybe" onclick="meetNo()">Not now</button>
+  `;
+  document.querySelector(".card").appendChild(div);
+}
+
+// Meet Yes → WhatsApp notification
+function meetYes(){
   typeWriter(
-    "That’s okay.\nSome things are better felt slowly.",
+    "That sounds nice.\nWe can decide whenever you feel comfortable.",
+    "finalMessage",
+    () => {
+      setTimeout(()=>{
+        window.location.href =
+          "https://wa.me/977XXXXXXXXXX?text=Hey%20I%20saw%20your%20site.%20We%20can%20meet%20sometime.";
+      },1500);
+    }
+  );
+}
+
+// Meet No
+function meetNo(){
+  typeWriter(
+    "No pressure at all.\nThank you for reading this.",
     "finalMessage"
   );
-  document.getElementById("finalMessage").classList.remove("hidden");
 }
 
 // Floating hearts
 setInterval(()=>{
   const h=document.createElement("div");
   h.className="heart";
-  h.innerHTML="❤️   ❤️";
   h.innerHTML="❤️";
-   h.innerHTML="❤️   ❤️";
   h.style.left=Math.random()*100+"vw";
   h.style.animationDuration=4+Math.random()*3+"s";
   document.body.appendChild(h);
@@ -162,6 +195,3 @@ setInterval(()=>{
 
 </body>
 </html>
-
-
-
